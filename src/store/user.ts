@@ -6,8 +6,11 @@ export const useUserStore = defineStore("user", {
     user: null as any
   }),
   actions: {
+    GET_USER(user: any) {
+      return this.user;
+    },
     UPDATE_USER(user: any) {
-      this.user = user
+      this.user = user;
     },
   },
 });

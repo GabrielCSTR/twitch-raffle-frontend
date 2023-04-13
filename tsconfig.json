@@ -25,5 +25,6 @@
     "src/**/*.tsx",
     "src/**/*.vue"
   ],
+  "sfc": {},
   "references": [{ "path": "./tsconfig.node.json" }]
 }

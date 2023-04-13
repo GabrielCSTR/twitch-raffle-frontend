@@ -11,7 +11,7 @@ function getUser() {
 async function setUserToken() {
    const user = getUser();
    const userStore: any = useUserStore();
-   userStore.UPDATE_PLAYER(user);
+   userStore.UPDATE_USER(user);
 }
 
 function parseJwt(token: string) {

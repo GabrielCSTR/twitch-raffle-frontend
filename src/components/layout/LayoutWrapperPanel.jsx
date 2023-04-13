@@ -1,16 +1,15 @@
 import { defineComponent } from "vue";
 import SideBar from "@/components/SideBar.vue";
+import Header from "@/components/header/index.vue";
 
 export default defineComponent({
   setup(props, { slots }) {
     return () => (
       <>
-        <div class="flex min-h-screen flex-no-wrap bg-gray-200">
-          <SideBar />
-
-          <div class="container mx-auto py-10 min-h-screen md:w-4/5 w-11/12 px-6">
-            {slots.default()}
-          </div>
+        <SideBar />
+        <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
+          <Header />
+          {slots.default()}
         </div>
       </>
     );

@@ -18,7 +18,7 @@ export default defineComponent({
 <template>
     <LayoutWrapperPanel>
         <template v-slot:default>
-            <MainContent/>
+            <h1>NEWWWWW SUBB</h1>
         </template>
     </LayoutWrapperPanel>
 </template>
