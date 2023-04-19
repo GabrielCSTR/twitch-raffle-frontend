@@ -3,11 +3,12 @@
 import { defineComponent } from 'vue'
 import LayoutWrapperPanel from '@/components/layout/LayoutWrapperPanel.jsx'
 import MainContent from '@/components/MainContent.vue';
-
+import MainRewardsSub from '@/components/MainRewardsSub.vue';
 export default defineComponent({
     components: {
         LayoutWrapperPanel,
-        MainContent
+        MainContent,
+        MainRewardsSub
     },
     setup() {
         
@@ -18,7 +19,7 @@ export default defineComponent({
 <template>
     <LayoutWrapperPanel>
         <template v-slot:default>
-            <h1>NEWWWWW SUBB</h1>
+           <MainRewardsSub/>
         </template>
     </LayoutWrapperPanel>
 </template>

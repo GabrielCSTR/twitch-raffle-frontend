@@ -1,6 +1,7 @@
 import axios from "axios";
 import useLocalStorage from "./useLocalStorage";
-import { useUserStore } from "@/store/user";
+import { useAppStore, useRouletteStore, useUserStore } from "@/store/user";
+
 const API_URL = import.meta.env.NODE_ENV === 'development' ? 'http://localhost:3005/api/v1' : `${import.meta.env.VITE_API_URL}/api/v1`;
 
 function getUser() {
@@ -12,6 +13,25 @@ async function setUserToken() {
    const user = getUser();
    const userStore: any = useUserStore();
    userStore.UPDATE_USER(user);
+}
+
+async function getTwitchViews(){
+  const userStore:any = useUserStore();
+  const useRoulleteStore:any = useRouletteStore();
+  const useApp = useAppStore();
+  useApp.SET_LOADING(true);
+  await axios
+  .get(API_URL +'/twitch/'+ userStore.user.twitchId + '/views', { headers: { Authorization: 'Bearer 1lk4jwfuoo44u79y22evvr3ut5zsr3'} , withCredentials: true })
+  .then(data =>{ 
+    useRoulleteStore.SET_USERS(data.data);
+    useApp.SET_LOADING(false);
+  })
+  .catch(err => {
+    console.log(err);
+    if (err.response.status == 401){
+      window.location.href = '/#/';
+    }
+  })
 }
 
 function parseJwt(token: string) {
@@ -29,9 +49,33 @@ function parseJwt(token: string) {
   return JSON.parse(jsonPayload);
 }
 
+async function getRouletteWinner(amountUsers: number){
+  const useApp = useAppStore();
+  useApp.SET_LOADING(true);
+  await axios
+  .get(API_URL +`/roulette-bets/winner/${amountUsers}`, 
+  { 
+    headers: { Authorization: 'Bearer 1lk4jwfuoo44u79y22evvr3ut5zsr3'} , 
+    withCredentials: true
+  })
+  .then(data =>{ 
+    const useRoulleteStore:any = useRouletteStore();
+    useRoulleteStore.SET_WINNER(data.data);
+    useApp.SET_LOADING(false);
+  })
+  .catch(err => {
+    console.log(err);
+    if (err.response.status == 401){
+      window.location.href = '/#/';
+    }
+  })
+}
+
 
 export default function useHttp() {
   return {
-    setUserToken
+    setUserToken,
+    getTwitchViews,
+    getRouletteWinner
   };
 }
