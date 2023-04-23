@@ -2,6 +2,15 @@
   "name": "web",
   "private": true,
   "version": "0.0.0",
+  "description": "FrontEnd Twitch Raffle",
+  "author": "STRDeveloped",
+  "license": "MIT",
+  "homepage": "https://github.com/GabrielCSTR/twitch-raffle#readme",
+  "documentation": "https://github.com/GabrielCSTR/twitch-raffle",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GabrielCSTR/twitch-raffle.git"
+  },
   "type": "module",
   "scripts": {
     "start:dev": "vite",
