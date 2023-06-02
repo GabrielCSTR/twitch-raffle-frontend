@@ -21,7 +21,26 @@ async function getTwitchViews(){
   const useApp = useAppStore();
   useApp.SET_LOADING(true);
   await axios
-  .get(API_URL +'/twitch/'+ userStore.user.twitchId + '/views', { headers: { Authorization: 'Bearer 1lk4jwfuoo44u79y22evvr3ut5zsr3'} , withCredentials: true })
+  .get(API_URL +'/twitch/'+ userStore.user.twitchId + '/views', { headers: { Authorization: `Bearer ${userStore.user.token_twitch}`} , withCredentials: true })
+  .then(data =>{ 
+    useRoulleteStore.SET_USERS(data.data);
+    useApp.SET_LOADING(false);
+  })
+  .catch(err => {
+    console.log(err);
+    if (err.response.status == 401){
+      window.location.href = '/#/';
+    }
+  })
+}
+
+async function getTwitchSubs(){
+  const userStore:any = useUserStore();
+  const useRoulleteStore:any = useRouletteStore();
+  const useApp = useAppStore();
+  useApp.SET_LOADING(true);
+  await axios
+  .get(API_URL +'/twitch/'+ userStore.user.twitchId + '/subs', { headers: { Authorization: `Bearer ${userStore.user.token_twitch}`} , withCredentials: true })
   .then(data =>{ 
     useRoulleteStore.SET_USERS(data.data);
     useApp.SET_LOADING(false);
@@ -51,11 +70,12 @@ function parseJwt(token: string) {
 
 async function getRouletteWinner(amountUsers: number){
   const useApp = useAppStore();
+  const userStore:any = useUserStore();
   useApp.SET_LOADING(true);
   await axios
   .get(API_URL +`/roulette-bets/winner/${amountUsers}`, 
   { 
-    headers: { Authorization: 'Bearer 1lk4jwfuoo44u79y22evvr3ut5zsr3'} , 
+    headers: { Authorization: `Bearer ${userStore.user.token_twitch}`} , 
     withCredentials: true
   })
   .then(data =>{ 

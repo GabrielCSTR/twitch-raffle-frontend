@@ -34,7 +34,7 @@ export default defineComponent({
                         <h2 class="text-2xl font-semibold text-gray-500 sm:text-3xl dark:text-gray-300">{{ useRoulleteStore.users?.length }}</h2>
                     </div>
 
-                    <div v-if="useRoulleteStore.winner" class="flex items-center justify-between px-8 py-4 border border-green-500 cursor-pointer rounded-xl">
+                    <div v-if="useRoulleteStore.winner" class="flex items-center justify-between px-8 py-4 border border-green-700 cursor-pointer rounded-xl">
                         <div class="flex flex-col items-center space-y-1">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-600 dark:text-green-500 sm:h-7 sm:w-7" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
@@ -49,7 +49,7 @@ export default defineComponent({
                                 {{ new Date().toLocaleDateString() }}
                             </div>
 
-                            <h2 class="text-2xl font-semibold text-green-600 dark:text-green-500 sm:text-3xl">{{ useRoulleteStore.users[useRoulleteStore.winner].from_name }}</h2>
+                            <h2 class="text-2xl font-semibold text-green-600 dark:text-green-500 sm:text-xl">{{ useRoulleteStore.users[useRoulleteStore.winner].from_name }}</h2>
                         </div>
                     </div>
                   
