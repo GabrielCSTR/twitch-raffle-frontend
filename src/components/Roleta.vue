@@ -804,7 +804,7 @@ export default {
   },
   async mounted() {
     const useRequestHttp = useHttp();
-    await useRequestHttp.getTwitchViews();
+    await useRequestHttp.getTwitchSubs();
 
   },
   unmounted(){

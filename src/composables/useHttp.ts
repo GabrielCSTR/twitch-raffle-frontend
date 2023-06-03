@@ -96,6 +96,7 @@ export default function useHttp() {
   return {
     setUserToken,
     getTwitchViews,
+    getTwitchSubs,
     getRouletteWinner
   };
 }
