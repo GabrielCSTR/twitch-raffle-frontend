@@ -789,6 +789,10 @@ const numbers = [
 ];
 export default {
   props: {
+    isViews: {
+        type: Boolean,
+        required: true,
+    },
   },
   components: {
     RouletteItem,
@@ -804,7 +808,11 @@ export default {
   },
   async mounted() {
     const useRequestHttp = useHttp();
-    await useRequestHttp.getTwitchSubs();
+    if(this.isViews) {
+      await useRequestHttp.getTwitchViews();
+    } else {
+      await useRequestHttp.getTwitchSubs();
+    }
 
   },
   unmounted(){

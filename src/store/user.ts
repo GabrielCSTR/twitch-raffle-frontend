@@ -56,6 +56,7 @@ export const useRouletteStore = defineStore("roulette", {
       return this.winner
     },
     CLEAR_DATA(){
+      this.users = null;
       this.winner = null;
       this.lastNumber = 0;
     }
