@@ -1,6 +1,6 @@
 import axios from "axios";
 import useLocalStorage from "./useLocalStorage";
-import { useAppStore, useRouletteStore, useUserStore } from "@/store/user";
+import { channelStatsStore, useAppStore, useRouletteStore, useUserStore } from "@/store/user";
 
 const API_URL = import.meta.env.NODE_ENV === 'development' ? 'http://localhost:3005/api/v1' : `${import.meta.env.VITE_API_URL}/api/v1`;
 
@@ -91,12 +91,38 @@ async function getRouletteWinner(amountUsers: number){
   })
 }
 
+async function getChannelStats(){
+  const useApp = useAppStore();
+  const userStore:any = useUserStore();
+  useApp.SET_LOADING(true);
+  await axios
+  .get(API_URL + '/twitch/'+ userStore.user.twitchId + '/channel-stats', 
+  { 
+    headers: { Authorization: `Bearer ${userStore.user.token_twitch}`} , 
+    withCredentials: true
+  })
+  .then(({data}: any) =>{ 
+    const channelStatsData:any = channelStatsStore();
+    channelStatsData.SET_FOLLOWS_COUNT(data.followsCount);
+    channelStatsData.SET_SUBS_COUNT(data.subsCount);
+    channelStatsData.SET_MODS_COUNT(data.modsCount);
+    useApp.SET_LOADING(false);
+  })
+  .catch(err => {
+    console.log(err);
+    if (err.response.status == 401){
+      window.location.href = '/#/';
+    }
+  })
+}
+
 
 export default function useHttp() {
   return {
     setUserToken,
     getTwitchViews,
     getTwitchSubs,
+    getChannelStats,
     getRouletteWinner
   };
 }

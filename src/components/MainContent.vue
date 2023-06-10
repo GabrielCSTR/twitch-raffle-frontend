@@ -1,3 +1,22 @@
+<script lang="ts">
+import { defineComponent } from 'vue'
+import useHttp from '../composables/useHttp';
+import { channelStatsStore } from '../store/user';
+
+export default defineComponent({
+    setup() {
+        const useChannelStatsStore = channelStatsStore();
+        return {
+            useChannelStatsStore
+        }
+    },
+    async mounted() {
+        const useRequestHttp = useHttp();
+        await useRequestHttp.getChannelStats();
+    },
+})
+</script>
+
 <template>
     <div class="px-6 pt-6 2xl:container">
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -34,7 +53,7 @@
                     <div>
                         <h5 class="text-xl text-gray-600 text-center">Canal Activities</h5>
                         <div class="mt-2 flex justify-center gap-4">
-                            <h3 class="text-3xl font-bold text-gray-700">128</h3>
+                            <h3 class="text-3xl font-bold text-gray-700">{{ useChannelStatsStore.GET_FOLLOWS_COUNT() }}</h3>
                             <div class="flex items-end gap-1 text-green-500">
                                 <svg class="w-3" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M6.00001 0L12 8H-3.05176e-05L6.00001 0Z" fill="currentColor"/>
@@ -47,8 +66,8 @@
                     <table class="w-full text-gray-600">
                         <tbody>
                             <tr>
-                                <td class="py-2">Views</td>
-                                <td class="text-gray-500">896</td>
+                                <td class="py-2">Seguidores</td>
+                                <td class="text-gray-500">{{ useChannelStatsStore.GET_FOLLOWS_COUNT() }}</td>
                                 <td>
                                     <svg class="w-16 ml-auto" viewBox="0 0 68 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect opacity="0.4" width="17" height="21" rx="1" fill="#e4e4f2"/>
@@ -67,7 +86,7 @@
                             </tr>
                             <tr>
                                 <td class="py-2">Subs</td>
-                                <td class="text-gray-500">1200</td>
+                                <td class="text-gray-500">{{ useChannelStatsStore.GET_SUBS_COUNT() }}</td>
                                 <td>
                                     <svg class="w-16 ml-auto" viewBox="0 0 68 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect opacity="0.4" width="17" height="21" rx="1" fill="#e4e4f2"/>
@@ -86,7 +105,7 @@
                             </tr>
                             <tr>
                                 <td class="py-2">Moderadores</td>
-                                <td class="text-gray-500">12</td>
+                                <td class="text-gray-500">{{ useChannelStatsStore.GET_MODS_COUNT() }}</td>
                                 <td>
                                     <svg class="w-16 ml-auto" viewBox="0 0 68 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect opacity="0.4" width="17" height="21" rx="1" fill="#e4e4f2"/>
@@ -109,7 +128,7 @@
             </div>
             <div>
                 <div class="h-full py-6 px-6 rounded-xl border border-gray-200 bg-white">
-                    <h5 class="text-xl text-gray-700">Downloads</h5>
+                    <h5 class="text-xl text-gray-700">VIDEO</h5>
                     <div class="my-8">
                         <h1 class="text-5xl font-bold text-gray-800">64,5%</h1>
                         <span class="text-gray-500">Compared to last week $13,988</span>
@@ -265,6 +284,5 @@
             </div>
         </div>
     </div>
-    
-   
+      
 </template>

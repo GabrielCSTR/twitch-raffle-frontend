@@ -62,3 +62,31 @@ export const useRouletteStore = defineStore("roulette", {
     }
   },
 });
+
+export const channelStatsStore = defineStore("channelStats", {
+  state: () => ({
+    followsCount: 0,
+    subsCount: 0,
+    modsCount: 0
+  }),
+  actions: {
+    SET_FOLLOWS_COUNT(count: number){
+      this.followsCount = count;
+    },
+    GET_FOLLOWS_COUNT(){
+      return this.followsCount;
+    },
+    SET_SUBS_COUNT(count: number){
+      this.subsCount = count;
+    },
+    GET_SUBS_COUNT(){
+      return this.subsCount;
+    },
+    SET_MODS_COUNT(count: number){
+      this.modsCount = count;
+    },
+    GET_MODS_COUNT(){
+      return this.modsCount;
+    }
+  }
+})
